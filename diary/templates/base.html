@@ -37,6 +37,13 @@
                             <li class="nav-item">
                                 <a class="nav-link {% block active_inquiry %}{% endblock %}" href="{% url 'diary:inquiry' %}">INQUIRY</a>
                             </li>
+<!--                            ログイン中-->
+                            {% if user.is_authenticated %}
+<!--                            日記一覧ページへのリンク-->
+                            <li class="nav-item">
+                                <a class="nav-link {% block active_diary_list %}{% endblock %}" href="{% url 'diary:diary_list' %}">DIARY LIST</a>
+                            </li>
+                            {% endif %}
                         </ul>
                         <ul class="navbar-nav ms-auto">
                             {% if user.is_authenticated %}

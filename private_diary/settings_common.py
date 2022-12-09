@@ -220,3 +220,8 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
 #デフォルトのメール送信元を設定
 DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
+
+MEDIA_URL = '/media/'
+
+# ログイン/ログアウト後の遷移先を設定
+LOGIN_REDIRECT_URL = 'diary:diary_list'
