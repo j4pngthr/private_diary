@@ -12,11 +12,11 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <div class="d-flex justify-content-end mb-4">
-                <a class="btn btn-primary float-right" href="#">新規作成</a>
+                <a class="btn btn-primary float-right" href="{% url 'diary:diary_create' %}">新規作成</a>
             </div>
             {% for diary in diary_list %}
             <div class="post-preview">
-                <a href="#">
+                <a href="{% url 'diary:diary_detail' diary.pk %}">
                     <h2 class="post-title">
                         {{ diary.title }}
                     </h2>
