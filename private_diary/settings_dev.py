@@ -1,3 +1,4 @@
+# 開発環境固有の設定ファイル
 from .settings_common import *
 
 # SECURITY WARNING: keep the secret key used in production secret!
