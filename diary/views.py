@@ -33,6 +33,8 @@ class InquiryView(generic.FormView):
 class DiaryListView(LoginRequiredMixin, generic.ListView):
     model = Diary
     template_name = 'diary_list.html'
+    # ページネーションをつける
+    paginate_by = 2
 
     def get_queryset(self):
         # ログインしているユーザーのインスタンスを取得
