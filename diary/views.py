@@ -8,7 +8,9 @@ from django.views import generic
 from .forms import InquiryForm, DiaryCreateForm
 
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+from django.shortcuts import get_object_or_404
 
 from .models import Diary
 # from .models import Post
@@ -43,15 +45,24 @@ class DiaryListView(LoginRequiredMixin, generic.ListView):
         diaries = Diary.objects.filter(user=self.request.user).order_by('-created_at')
         return diaries
 
-class DetailView(generic.DetailView):
-    model = Post
-    slug_field = "title" # モデルのフィールド名
-    slug_url_kwarg = "title" # urls.pyでのキーワードの名前
+# class DetailView(generic.DetailView):
+#     model = Post
+#     slug_field = "title" # モデルのフィールド名
+#     slug_url_kwarg = "title" # urls.pyでのキーワードの名前
+
+class OnlyYouMixin(UserPassesTestMixin):
+    raise_exception = True
+
+    def test_func(self):
+        # URLに埋め込まれた主キーから日記データを1県取得．取得できなかった場合は404エラー
+        diary = get_object_or_404(Diary, pk=self.kwargs['pk'])
+        # ログインユーザと日記の作成ユーザを比較し，異なればraise_exceptionの設定に従う
+        return self.request.uer == diary.user
 
 class DiaryDetailView(LoginRequiredMixin, generic.DetailView):
     model = Diary
     template_name = 'diary_detail.html'
-    pk_url_kwarg = 'id'
+    # pk_url_kwarg = 'pk'
 
 class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
     model = Diary

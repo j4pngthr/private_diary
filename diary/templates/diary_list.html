@@ -15,21 +15,21 @@
                 <a class="btn btn-primary float-right" href="{% url 'diary:diary_create' %}">新規作成</a>
             </div>
             {% for diary in diary_list %}
-            <div class="post-preview">
-                <a href="{% url 'diary:diary_detail' diary.pk %}">
-                    <h2 class="post-title">
-                        {{ diary.title }}
-                    </h2>
-                    <h3 class="post-subtitle">
-<!--                        日記の本文を20桁だけ-->
-                        {{ diary.content|truncatechars:20 }}
-                    </h3>
-                </a>
-                <p class="post-meta">{{ diary.created_at }}</p>
-            </div>
-            <hr class="my-4">
-            {% empty %}
-            <p>日記がありません．</p>
+                <div class="post-preview">
+                    <a href="{% url 'diary:diary_detail' diary.pk %}">
+                        <h2 class="post-title">
+                            {{ diary.title }}
+                        </h2>
+                        <h3 class="post-subtitle">
+    <!--                        日記の本文を20桁だけ-->
+                            {{ diary.content|truncatechars:20 }}
+                        </h3>
+                    </a>
+                    <p class="post-meta">{{ diary.created_at }}</p>
+                </div>
+                <hr class="my-4">
+                {% empty %}
+                    <p>日記がありません．</p>
             {% endfor %}
 <!--            ページネーション処理-->
             {% if is_paginated %}
