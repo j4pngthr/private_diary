@@ -57,14 +57,14 @@ class OnlyYouMixin(UserPassesTestMixin):
         # URLに埋め込まれた主キーから日記データを1県取得．取得できなかった場合は404エラー
         diary = get_object_or_404(Diary, pk=self.kwargs['pk'])
         # ログインユーザと日記の作成ユーザを比較し，異なればraise_exceptionの設定に従う
-        return self.request.uer == diary.user
+        return self.request.user == diary.user
 
-class DiaryDetailView(LoginRequiredMixin, generic.DetailView):
+class DiaryDetailView(LoginRequiredMixin, OnlyYouMixin, generic.DetailView):
     model = Diary
     template_name = 'diary_detail.html'
     # pk_url_kwarg = 'pk'
 
-class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
+class DiaryCreateView(LoginRequiredMixin, OnlyYouMixin, generic.CreateView):
     model = Diary
     template_name = 'diary_create.html'
     form_class = DiaryCreateForm
@@ -82,7 +82,7 @@ class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
         messages.error(self.request, "日記の作成に失敗しました．")
         return super().form_invalid(form)
 
-class DiaryUpdateView(LoginRequiredMixin, generic.UpdateView):
+class DiaryUpdateView(LoginRequiredMixin, OnlyYouMixin, generic.UpdateView):
     model = Diary
     template_name = 'diary_update.html'
     form_class = DiaryCreateForm
@@ -98,7 +98,7 @@ class DiaryUpdateView(LoginRequiredMixin, generic.UpdateView):
         messages.success(self.request, '日記の更新に失敗しました．')
         return super().form_invalid(form)
 
-class DiaryDeleteView(LoginRequiredMixin, generic.DeleteView):
+class DiaryDeleteView(LoginRequiredMixin, OnlyYouMixin, generic.DeleteView):
     model = Diary
     template_name = 'diary_delete.html'
     success_url = reverse_lazy('diary:diary_list')
