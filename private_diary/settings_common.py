@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'django_bootstrap5',
+
+    'django_ses',
 ]
 
 MIDDLEWARE = [
