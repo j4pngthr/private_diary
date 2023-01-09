@@ -63,3 +63,16 @@ LOGGING = {
         },
     }
 }
+
+# セキュリティ関連設定
+# security.W004
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# security.W008
+SECURE_SSL_REDIRECT = True
+# security.W012
+SESSION_COOKIE_SECURE = True
+# security.W016
+CSRF_COOKIE_SECURE = True
+# security.W021
+SECURE_HSTS_PRELOAD = True
