@@ -5,7 +5,7 @@ from .settings_common import *
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # デバッグモードを有効にするかどうか(本番環境では必ずFalseにする)
-DEBUG = False
+DEBUG = True
 
 # 許可するホスト名のリスト
 ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
